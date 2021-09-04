@@ -11,7 +11,7 @@ For A6 devices, restore from `pwned DFU` mode or `pwned Recovery Mode`.
 
 ## references  
 ### list of original keys in xpwn/ipsw-patch  
-| key | description | type | 
+| key | type | description | 
 |---------|----------|----------|  
 | hwmodel | String (ex. `N42`) | Used to move the jetsamproperties  daemon (com.apple.jetsamproperties.`XXX`.plist) for iOS 8 untether, such as daibutsu. |
 | needPref | Bool | Set SBShowNonDefaultSystemApps on SpringBoard. This is required to display the Non-Default apps on the home screen on some devices. |
@@ -23,13 +23,13 @@ For A6 devices, restore from `pwned DFU` mode or `pwned Recovery Mode`.
 ### list of flags and devices supported by haxx_overwrite (dyld haxx)
 | flag | device | 
 |---------|----------|
-| -n94 | iPhone 4S |
-| -n42 | iPhone 5 [iPhone5,2] |
-| -n78 | iPod touch 5th gen |
-| -k93a | iPad 2 [iPad2,4] |
-| -p105 | iPad mini [iPad2,5] |
-| -p106 | iPad mini [iPad2,6] |
-| -p107 | iPad mini [iPad2,7] |
-| -j1 | iPad 3rd gen [iPad3,1] |
-| -j2 | iPad 3rd gen [iPad3,2] |
-| -j2a | iPad 3rd gen [iPad3,3] |
+| `-n94` | iPhone 4S |
+| `-n42` | iPhone 5 [iPhone5,2] |
+| `-n78` | iPod touch 5th gen |
+| `-k93a` | iPad 2 [iPad2,4] |
+| `-p105` | iPad mini [iPad2,5] |
+| `-p106` | iPad mini [iPad2,6] |
+| `-p107` | iPad mini [iPad2,7] |
+| `-j1` | iPad 3rd gen [iPad3,1] |
+| `-j2` | iPad 3rd gen [iPad3,2] |
+| `-j2a` | iPad 3rd gen [iPad3,3] |
