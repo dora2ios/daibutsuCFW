@@ -7,7 +7,7 @@
 
 ## how to restore with custom firmware  
 For A5 devices, restore from `kDFU mode` or `pwned DFU mode` or `pwned Recovery Mode`.  
-For A6 devices, restore from `pwned DFU` mode or `pwned Recovery Mode`.  
+For A6 devices, restore from `pwned DFU mode` or `pwned Recovery Mode`.  
 
 ## references  
 ### list of original keys in xpwn/ipsw-patch  
