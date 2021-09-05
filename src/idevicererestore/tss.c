@@ -586,7 +586,7 @@ int tss_request_add_ap_tags(plist_t request, plist_t parameters, plist_t overrid
                         unsigned char* rdsk_digest;
                         size_t rdsk_digest_size=0;
                         get_rdsk_digest(client->device->product_type, &rdsk_digest, &rdsk_digest_size);
-                        if(rdsk_digest != 0) {
+                        if(rdsk_digest_size != 0) {
                             plist_dict_remove_item(tss_entry, "Digest");
                             plist_dict_set_item(tss_entry, "Digest", plist_new_data((const char *)rdsk_digest, rdsk_digest_size));
                         }
