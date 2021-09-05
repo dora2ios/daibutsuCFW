@@ -46,6 +46,7 @@ extern "C" {
 #define FLAG_OTA_BBFW        1 << 11
 #define FLAG_UNOFFICIAL_BBFW 1 << 12
 #define FLAG_OLD_OTA_BBFW    1 << 13
+#define FLAG_OTA_BLOB        1 << 14
     
 struct idevicerestore_client_t;
 

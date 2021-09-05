@@ -32,6 +32,7 @@
 #include "img3.h"
 #include "common.h"
 #include "idevicerestore.h"
+#include "digest.h"
 
 #define TSS_CLIENT_VERSION_STRING "libauthinstall-293.1.16"
 #define ECID_STRSIZE 0x20
@@ -40,6 +41,70 @@ typedef struct {
 	int length;
 	char* content;
 } tss_response;
+
+static void get_rdsk_digest(const char* product, unsigned char** data, size_t* size) {
+    
+    // s5l8940x
+    if (!strcmp(product, "iPhone4,1") ||
+        !strcmp(product, "iPad2,1")   ||
+        !strcmp(product, "iPad2,2")   ||
+        !strcmp(product, "iPad2,3"))
+    {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, s5l8940x_841_rdsk_digest, *size);
+        return;
+    }
+    
+    // s5l8942x
+    if (!strcmp(product, "iPad2,4") ||
+        !strcmp(product, "iPad5,5") ||
+        !strcmp(product, "iPad2,6") ||
+        !strcmp(product, "iPad2,7") ||
+        !strcmp(product, "iPod5,1"))
+    {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, s5l8942x_841_rdsk_digest, *size);
+        return;
+    }
+    
+    // s5l8945x
+    if (!strcmp(product, "iPad3,1") ||
+        !strcmp(product, "iPad3,2") ||
+        !strcmp(product, "iPad3,3"))
+    {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, s5l8945x_841_rdsk_digest, *size);
+        return;
+    }
+    
+    // s5l8950x
+    if (!strcmp(product, "iPhone5,1") ||
+        !strcmp(product, "iPhone5,2"))
+    {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, s5l8950x_841_rdsk_digest, *size);
+        return;
+    }
+    
+    // s5l8955x
+    if (!strcmp(product, "iPad3,4") ||
+        !strcmp(product, "iPad3,5") ||
+        !strcmp(product, "iPad3,6"))
+    {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, s5l8955x_841_rdsk_digest, *size);
+        return;
+    }
+    
+    return;
+}
+
+
 
 char* ecid_to_string(uint64_t ecid) {
 	char* ecid_string = malloc(ECID_STRSIZE);
@@ -452,7 +517,7 @@ static void tss_entry_apply_restore_request_rules(plist_t tss_entry, plist_t par
 	}
 }
 
-int tss_request_add_ap_tags(plist_t request, plist_t parameters, plist_t overrides) {
+int tss_request_add_ap_tags(plist_t request, plist_t parameters, plist_t overrides, struct idevicerestore_client_t* client) {
 	/* loop over components from build manifest */
 	plist_t manifest_node = plist_dict_get_item(parameters, "Manifest");
 	if (!manifest_node || plist_get_node_type(manifest_node) != PLIST_DICT) {
@@ -509,6 +574,26 @@ int tss_request_add_ap_tags(plist_t request, plist_t parameters, plist_t overrid
 				plist_dict_set_item(tss_entry, "Digest", plist_new_data(NULL, 0));
 			}
 		}
+        
+        if (!strcmp(key, "RestoreRamDisk")) {
+            if (client->flags & FLAG_OTA_BLOB) {
+                debug("DEBUG: Found %s\n", key);
+                if (node && plist_get_node_type(node) == PLIST_BOOLEAN) {
+                    uint8_t trusted;
+                    plist_get_bool_val(node, &trusted);
+                    if(trusted && plist_access_path(manifest_entry, 1, "Digest")){
+                        debug("DEBUG: Add OTA Digest data\n", key);
+                        unsigned char* rdsk_digest;
+                        size_t rdsk_digest_size=0;
+                        get_rdsk_digest(client->device->product_type, &rdsk_digest, &rdsk_digest_size);
+                        if(rdsk_digest != 0) {
+                            plist_dict_remove_item(tss_entry, "Digest");
+                            plist_dict_set_item(tss_entry, "Digest", plist_new_data((const char *)rdsk_digest, rdsk_digest_size));
+                        }
+                    }
+                }
+            }
+        }
 
 		/* finally add entry to request */
 		plist_dict_set_item(request, key, tss_entry);

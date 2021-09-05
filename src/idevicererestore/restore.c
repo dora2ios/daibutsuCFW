@@ -1982,230 +1982,230 @@ int restore_send_baseband_data(restored_client_t restore, struct idevicerestore_
                 }
                 
             } else if (!strcmp(client->device->product_type, "iPhone4,1")) {
-            /*
-             device_name  : iPhone 4s
-             product_type : iPhone4,1
-             Baseband     : Trek
-             signed fw    : 9.3.6
-             signed otafw : 6.1.3, 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                partialzip_download_file(n94_613_fw, trek_613_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(n94_841_fw, trek_841_path, client->basebandPath);
+                /*
+                 device_name  : iPhone 4s
+                 product_type : iPhone4,1
+                 Baseband     : Trek
+                 signed fw    : 9.3.6
+                 signed otafw : 6.1.3, 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    partialzip_download_file(n94_613_fw, trek_613_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(n94_841_fw, trek_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(n94_fw, trek_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPad2,2")) {
+                /*
+                 device_name  : iPad 2
+                 product_type : iPad2,2
+                 Baseband     : ICE3
+                 signed fw    : 9.3.5
+                 signed otafw : 6.1.3, 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    partialzip_download_file(k94_613_fw, ice3_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(k94_841_fw, ice3_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(k94_fw, ice3_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPad2,3")) {
+                /*
+                 device_name  : iPad 2
+                 product_type : iPad2,3
+                 Baseband     : Phoenix
+                 signed fw    : 9.3.6
+                 signed otafw : 6.1.3, 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    partialzip_download_file(k95_613_fw, phoenix_841_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(k95_841_fw, phoenix_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(k95_fw, phoenix_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPhone5,1")) {
+                /*
+                 device_name  : iPhone 5
+                 product_type : iPhone5,1
+                 Baseband     : Mav5
+                 signed fw    : 10.3.4
+                 signed otafw : 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
+                    partialzip_download_file(n41n42_fw, mav5_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(n41_841_fw, mav5_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(n41n42_fw, mav5_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPhone5,2")) {
+                /*
+                 device_name  : iPhone 5
+                 product_type : iPhone5,2
+                 Baseband     : Mav5
+                 signed fw    : 10.3.4
+                 signed otafw : 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
+                    partialzip_download_file(n41n42_fw, mav5_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(n42_841_fw, mav5_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(n41n42_fw, mav5_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPad2,6")) {
+                /*
+                 device_name  : iPad mini
+                 product_type : iPad2,6
+                 Baseband     : Mav5
+                 signed fw    : 9.3.6
+                 signed otafw : 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
+                    partialzip_download_file(p106_fw, mav5_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(p106_841_fw, mav5_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(p106_fw, mav5_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPad2,7")) {
+                /*
+                 device_name  : iPad mini
+                 product_type : iPad2,7
+                 Baseband     : Mav5
+                 signed fw    : 9.3.6
+                 signed otafw : 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
+                    partialzip_download_file(p107_fw, mav5_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(p107_841_fw, mav5_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(p107_fw, mav5_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPad3,2")) {
+                /*
+                 device_name  : iPad 3rd generation
+                 product_type : iPad3,2
+                 Baseband     : Mav4
+                 signed fw    : 9.3.6
+                 signed otafw : 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav4-6.7.00.\n");
+                    partialzip_download_file(j2_fw, mav4_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(j2_841_fw, mav4_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(j2_fw, mav4_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPad3,3")) {
+                /*
+                 device_name  : iPad 3rd generation
+                 product_type : iPad3,3
+                 Baseband     : Mav4
+                 signed fw    : 9.3.6
+                 signed otafw : 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav4-6.7.00.\n");
+                    partialzip_download_file(j3_fw, mav4_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(j3_841_fw, mav4_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(j3_fw, mav4_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPad3,5")) {
+                /*
+                 device_name  : iPad 4th generation
+                 product_type : iPad3,5
+                 Baseband     : Mav5
+                 signed fw    : 10.3.4
+                 signed otafw : 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
+                    partialzip_download_file(p102p103_fw, mav5_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(p102_841_fw, mav5_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(p102p103_fw, mav5_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPad3,6")) {
+                /*
+                 device_name  : iPad 4th generation
+                 product_type : iPad3,6
+                 Baseband     : Mav5
+                 signed fw    : 10.3.4
+                 signed otafw : 8.4.1
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
+                    partialzip_download_file(p102p103_fw, mav5_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    partialzip_download_file(p103_841_fw, mav5_841_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(p102p103_fw, mav5_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPhone5,3")) {
+                /*
+                 device_name  : iPhone 5c
+                 product_type : iPhone5,3
+                 Baseband     : Mav7Mav8
+                 signed fw    : 10.3.3
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav7Mav8-7.60.00.\n");
+                    partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    error("ERROR: 8.4.1 OTA SHSH is not provided for this device. Download and use Mav7Mav8-7.60.00.\n");
+                    partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
+                } else if (client->flags & FLAG_UNOFFICIAL_BBFW){
+                    partialzip_download_file(n51_fw, mav7mav8_1254_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
+                }
+                
+            } else if (!strcmp(client->device->product_type, "iPhone5,4")) {
+                /*
+                 device_name  : iPhone 5c
+                 product_type : iPhone5,4
+                 Baseband     : Mav7Mav8
+                 signed fw    : 10.3.3
+                 */
+                if (client->flags & FLAG_OLD_OTA_BBFW){
+                    error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav7Mav8-7.60.00.\n");
+                    partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
+                } else if (client->flags & FLAG_OTA_BBFW){
+                    error("ERROR: 8.4.1 OTA SHSH is not provided for this device. Download and use Mav7Mav8-7.60.00.\n");
+                    partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
+                } else if (client->flags & FLAG_UNOFFICIAL_BBFW){
+                    partialzip_download_file(n51_fw, mav7mav8_1254_path, client->basebandPath);
+                } else {
+                    partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
+                }
             } else {
-                partialzip_download_file(n94_fw, trek_path, client->basebandPath);
+                partialzip_download_file(fwurl, bbfwpath, client->basebandPath);
             }
-            
-        } else if (!strcmp(client->device->product_type, "iPad2,2")) {
-            /*
-             device_name  : iPad 2
-             product_type : iPad2,2
-             Baseband     : ICE3
-             signed fw    : 9.3.5
-             signed otafw : 6.1.3, 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                partialzip_download_file(k94_613_fw, ice3_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(k94_841_fw, ice3_path, client->basebandPath);
-            } else {
-                partialzip_download_file(k94_fw, ice3_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPad2,3")) {
-            /*
-             device_name  : iPad 2
-             product_type : iPad2,3
-             Baseband     : Phoenix
-             signed fw    : 9.3.6
-             signed otafw : 6.1.3, 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                partialzip_download_file(k95_613_fw, phoenix_841_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(k95_841_fw, phoenix_841_path, client->basebandPath);
-            } else {
-                partialzip_download_file(k95_fw, phoenix_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPhone5,1")) {
-            /*
-             device_name  : iPhone 5
-             product_type : iPhone5,1
-             Baseband     : Mav5
-             signed fw    : 10.3.4
-             signed otafw : 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
-                partialzip_download_file(n41n42_fw, mav5_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(n41_841_fw, mav5_841_path, client->basebandPath);
-            } else {
-                partialzip_download_file(n41n42_fw, mav5_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPhone5,2")) {
-            /*
-             device_name  : iPhone 5
-             product_type : iPhone5,2
-             Baseband     : Mav5
-             signed fw    : 10.3.4
-             signed otafw : 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
-                partialzip_download_file(n41n42_fw, mav5_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(n42_841_fw, mav5_841_path, client->basebandPath);
-            } else {
-                partialzip_download_file(n41n42_fw, mav5_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPad2,6")) {
-            /*
-             device_name  : iPad mini
-             product_type : iPad2,6
-             Baseband     : Mav5
-             signed fw    : 9.3.6
-             signed otafw : 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
-                partialzip_download_file(p106_fw, mav5_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(p106_841_fw, mav5_841_path, client->basebandPath);
-            } else {
-                partialzip_download_file(p106_fw, mav5_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPad2,7")) {
-            /*
-             device_name  : iPad mini
-             product_type : iPad2,7
-             Baseband     : Mav5
-             signed fw    : 9.3.6
-             signed otafw : 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
-                partialzip_download_file(p107_fw, mav5_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(p107_841_fw, mav5_841_path, client->basebandPath);
-            } else {
-                partialzip_download_file(p107_fw, mav5_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPad3,2")) {
-            /*
-             device_name  : iPad 3rd generation
-             product_type : iPad3,2
-             Baseband     : Mav4
-             signed fw    : 9.3.6
-             signed otafw : 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav4-6.7.00.\n");
-                partialzip_download_file(j2_fw, mav4_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(j2_841_fw, mav4_841_path, client->basebandPath);
-            } else {
-                partialzip_download_file(j2_fw, mav4_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPad3,3")) {
-            /*
-             device_name  : iPad 3rd generation
-             product_type : iPad3,3
-             Baseband     : Mav4
-             signed fw    : 9.3.6
-             signed otafw : 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav4-6.7.00.\n");
-                partialzip_download_file(j3_fw, mav4_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(j3_841_fw, mav4_841_path, client->basebandPath);
-            } else {
-                partialzip_download_file(j3_fw, mav4_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPad3,5")) {
-            /*
-             device_name  : iPad 4th generation
-             product_type : iPad3,5
-             Baseband     : Mav5
-             signed fw    : 10.3.4
-             signed otafw : 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
-                partialzip_download_file(p102p103_fw, mav5_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(p102_841_fw, mav5_841_path, client->basebandPath);
-            } else {
-                partialzip_download_file(p102p103_fw, mav5_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPad3,6")) {
-            /*
-             device_name  : iPad 4th generation
-             product_type : iPad3,6
-             Baseband     : Mav5
-             signed fw    : 10.3.4
-             signed otafw : 8.4.1
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav5-11.80.00.\n");
-                partialzip_download_file(p102p103_fw, mav5_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                partialzip_download_file(p103_841_fw, mav5_841_path, client->basebandPath);
-            } else {
-                partialzip_download_file(p102p103_fw, mav5_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPhone5,3")) {
-            /*
-             device_name  : iPhone 5c
-             product_type : iPhone5,3
-             Baseband     : Mav7Mav8
-             signed fw    : 10.3.3
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav7Mav8-7.60.00.\n");
-                partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                error("ERROR: 8.4.1 OTA SHSH is not provided for this device. Download and use Mav7Mav8-7.60.00.\n");
-                partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
-            } else if (client->flags & FLAG_UNOFFICIAL_BBFW){
-                partialzip_download_file(n51_fw, mav7mav8_1254_path, client->basebandPath);
-            } else {
-                partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
-            }
-            
-        } else if (!strcmp(client->device->product_type, "iPhone5,4")) {
-            /*
-             device_name  : iPhone 5c
-             product_type : iPhone5,4
-             Baseband     : Mav7Mav8
-             signed fw    : 10.3.3
-             */
-            if (client->flags & FLAG_OLD_OTA_BBFW){
-                error("ERROR: 6.1.3 OTA SHSH is not provided for this device. Download and use Mav7Mav8-7.60.00.\n");
-                partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
-            } else if (client->flags & FLAG_OTA_BBFW){
-                error("ERROR: 8.4.1 OTA SHSH is not provided for this device. Download and use Mav7Mav8-7.60.00.\n");
-                partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
-            } else if (client->flags & FLAG_UNOFFICIAL_BBFW){
-                partialzip_download_file(n51_fw, mav7mav8_1254_path, client->basebandPath);
-            } else {
-                partialzip_download_file(n48n49_fw, mav7mav8_path, client->basebandPath);
-            }
-        } else {
-            partialzip_download_file(fwurl, bbfwpath, client->basebandPath);
         }
-        
     }
     
     FILE *bb = fopen(client->basebandPath, "r");

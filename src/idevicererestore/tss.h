@@ -29,7 +29,8 @@ extern "C" {
 #endif
 
 #include <plist/plist.h>
-
+#include <idevicerestore.h>
+    
 /* parameters */
 int tss_parameters_add_from_manifest(plist_t parameters, plist_t build_identity);
 
@@ -37,7 +38,7 @@ int tss_parameters_add_from_manifest(plist_t parameters, plist_t build_identity)
 plist_t tss_request_new(plist_t overrides);
 
 int tss_request_add_common_tags(plist_t request, plist_t parameters, plist_t overrides);
-int tss_request_add_ap_tags(plist_t request, plist_t parameters, plist_t overrides);
+int tss_request_add_ap_tags(plist_t request, plist_t parameters, plist_t overrides, struct idevicerestore_client_t* client);
 int tss_request_add_baseband_tags(plist_t request, plist_t parameters, plist_t overrides);
 int tss_request_add_se_tags(plist_t request, plist_t parameters, plist_t overrides);
 

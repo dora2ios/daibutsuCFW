@@ -52,18 +52,21 @@
 
 #include "locking.h"
 
+#include "ubid_list.h"
+
 #define VERSION_XML "version.xml"
 
 #include <openssl/sha.h>
 
 #ifndef IDEVICERESTORE_NOMAIN
 static struct option longopts[] = {
-    { "debug",   no_argument,       NULL, 'd' },
-    { "ota",   no_argument,       NULL, 'o' },
-    { "oldota",   no_argument,       NULL, 'a' },
-    { "forcelatestbb",   no_argument,       NULL, 'f' },
-    { "help",    no_argument,       NULL, 'h' },
-    { "rerestore",    no_argument,      NULL, 'r' },
+    { "debug",              no_argument,    NULL, 'd' },
+    { "ota-bbfw",           no_argument,    NULL, 'o' },
+    { "old-ota-bbfw",       no_argument,    NULL, 'a' },
+    { "force-latest-bbfw",  no_argument,    NULL, 'f' },
+    { "help",               no_argument,    NULL, 'h' },
+    { "rerestore",          no_argument,    NULL, 'r' },
+    { "ota-blob",           no_argument,    NULL, 'b' },
     //{ "baseband", required_argument,    NULL,    'b' },
     //{ "manifest", required_argument,    NULL,    'm' },
     { NULL, 0, NULL, 0 }
@@ -72,13 +75,14 @@ static struct option longopts[] = {
 void usage(int argc, char* argv[]) {
     char* name = strrchr(argv[0], '/');
     printf("Usage: %s [OPTIONS] IPSW\n\n", (name ? name + 1 : argv[0]));
-    printf("  -r, --rerestore\ttake advantage of the 9.x 32 bit re-restore bug\n");
+    printf("  -r, --rerestore\t\ttake advantage of the 9.x 32 bit re-restore bug\n");
     //printf("  -b, --baseband\tspecify baseband to use instead of the latest OTA baseband\n");
     //printf("  -m, --manifest\tspecify manifest to use with the specified baseband\n");
-    printf("  -o, --ota\t\tuse 8.4.1 OTA baseband for 32-bit devices (except iPhone 5c)\n");
-    printf("  -a, --oldota\t\tuse 6.1.3 OTA baseband for A5 (s5l8940x) devices\n");
-    printf("  -f, --forcelatestbb\tuse the latest baseband provided for Qualcomm MDM9615M (Mav7Mav8) baseband chip. [dangerous]\n");
-    printf("  -d, --debug\t\tprint debug information\n");
+    printf("  -b, --ota-blob\t\tuse 8.4.1 OTA SHSH blob for 32 bit devices and restore with custom firmware. (Except for iPhone 5c).\n");
+    printf("  -o, --ota-bbfw\t\tuse 8.4.1 OTA baseband for 32-bit devices (except iPhone 5c)\n");
+    printf("  -a, --old-ota-bbfw\t\tuse 6.1.3 OTA baseband for A5 (s5l8940x) devices\n");
+    printf("  -f, --force-latest-bbfw\tuse the latest baseband provided for Qualcomm MDM9615M (Mav7Mav8) baseband chip. [dangerous]\n");
+    printf("  -d, --debug\t\t\tprint debug information\n");
     printf("\n");
     printf("Homepage: https://downgrade.party\n");
     printf("Based on idevicerestore by libimobiledevice.\n");
@@ -140,6 +144,137 @@ static const char *mav7mav8_1254_path = "Firmware/Mav7Mav8-10.80.02.Release.bbfw
 static const char *phoenix_712_path = "Firmware/Phoenix-3.0.04.Release.bbfw";
 
 static int idevicerestore_keep_pers = 0;
+
+
+static void get_ubid(const char* product, unsigned char** data, size_t* size) {
+    
+    // s5l8940x
+    if (!strcmp(product, "iPhone4,1")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, n94_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad2,1")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, k93_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad2,2")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, k94_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad2,3")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, k95_841_ubid, *size);
+        return;
+    }
+    
+    // s5l8942x
+    if (!strcmp(product, "iPad2,4")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, k93a_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPod5,1")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, n78_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad2,5")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, p105_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad2,6")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, p106_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad2,7")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, p107_841_ubid, *size);
+        return;
+    }
+    
+    // s5l8945x
+    if (!strcmp(product, "iPad3,1")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, j1_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad3,2")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, j2_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad3,3")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, j2a_841_ubid, *size);
+        return;
+    }
+    
+    // s5l8950x
+    if (!strcmp(product, "iPhone5,1")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, n41_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPhone5,2")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, n42_841_ubid, *size);
+        return;
+    }
+    
+    //s5l8955x
+    if (!strcmp(product, "iPad3,4")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, p101_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad3,5")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, p102_841_ubid, *size);
+        return;
+    }
+    
+    if (!strcmp(product, "iPad3,6")) {
+        *size = 20;
+        *data = malloc(*size);
+        memcpy(*data, p103_841_ubid, *size);
+        return;
+    }
+    
+    return;
+}
+
 
 static int load_version_data(struct idevicerestore_client_t* client)
 {
@@ -2080,7 +2215,7 @@ int main(int argc, char* argv[]) {
     }
     
     //while ((opt = getopt_long(argc, argv, "dhofcersxtplui:nC:k:b:m:", longopts, &optindex)) > 0) {
-    while ((opt = getopt_long(argc, argv, "dhofacersxtplui:nC:k:", longopts, &optindex)) > 0) {
+    while ((opt = getopt_long(argc, argv, "dhbofacersxtplui:nC:k:", longopts, &optindex)) > 0) {
         switch (opt) {
             case 'h':
                 usage(argc, argv);
@@ -2091,6 +2226,10 @@ int main(int argc, char* argv[]) {
                 break;
             
             /* beta */
+            case 'b':
+                client->flags |= FLAG_OTA_BLOB;
+                break;
+                
             case 'o':
                 client->flags |= FLAG_OTA_BBFW;
                 break;
@@ -2530,6 +2669,10 @@ int get_tss_response(struct idevicerestore_client_t* client, plist_t build_ident
         info("Using local SHSH\n");
         return 0;
     }
+    else if ((client->flags & FLAG_RERESTORE) &&
+             (client->flags & FLAG_OTA_BLOB)) {
+        info("Trying to fetch new OTA SHSH blob\n");
+    }
     else if (client->flags & FLAG_RERESTORE) {
         info("Attempting to check Cydia TSS server for SHSH blobs\n");
         client->tss_url = strdup("http://cydia.saurik.com/TSS/controller?action=2");
@@ -2563,6 +2706,22 @@ int get_tss_response(struct idevicerestore_client_t* client, plist_t build_ident
     
     tss_parameters_add_from_manifest(parameters, build_identity);
     
+    if (client->flags & FLAG_OTA_BLOB) {
+        info("Trying to create request for OTA SHSH blob\n");
+        plist_dict_remove_item(parameters, "UniqueBuildID");
+        
+        unsigned char* ubid;
+        size_t ubid_size=0;
+        get_ubid(client->device->product_type, &ubid, &ubid_size);
+        if (ubid_size != 0){
+            plist_dict_set_item(parameters, "UniqueBuildID", plist_new_data((const char*)ubid, ubid_size));
+        } else {
+            error("ERROR: Unable to find UniqueBuildID node for OTA SHSH blob\n");
+            plist_free(parameters);
+            return -1;
+        }
+    }
+    
     /* create basic request */
     request = tss_request_new(NULL);
     if (request == NULL) {
@@ -2580,7 +2739,7 @@ int get_tss_response(struct idevicerestore_client_t* client, plist_t build_ident
     }
     
     /* add tags from manifest */
-    if (tss_request_add_ap_tags(request, parameters, NULL) < 0) {
+    if (tss_request_add_ap_tags(request, parameters, NULL, client) < 0) {
         error("ERROR: Unable to add common tags to TSS request\n");
         plist_free(request);
         plist_free(parameters);

@@ -309,7 +309,7 @@ int dfu_get_sep_nonce(struct idevicerestore_client_t* client, unsigned char** no
 			return -1;
 		}
 	}
-
+    
 	const struct irecv_device_info *device_info = irecv_get_device_info(client->dfu->client);
 	if (!device_info) {
 		return -1;
